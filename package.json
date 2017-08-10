@@ -1,25 +1,30 @@
 {
-  "name": "oerkv3",
-  "version": "1.0.0",
-  "description": "OERK - Outdoor Equipment Rental Kokkola",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "JazyLabs",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yassinej/oerkv3.git"
-  },
-  "keywords": [
-    "React",
-    "MERN",
-    "Redux",
-    "Passport"
-  ],
-  "bugs": {
-    "url": "https://github.com/yassinej/oerkv3/issues"
-  },
-  "homepage": "https://github.com/yassinej/oerkv3#readme"
+	"name": "oerkv3",
+	"version": "1.0.0",
+	"description": "OERK - Outdoor Equipment Rental Kokkola",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"server": "nodemon index.js"
+	},
+	"author": "JazyLabs",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/yassinej/oerkv3.git"
+	},
+	"keywords": [
+		"React",
+		"MERN",
+		"Redux",
+		"Passport"
+	],
+	"bugs": {
+		"url": "https://github.com/yassinej/oerkv3/issues"
+	},
+	"homepage": "https://github.com/yassinej/oerkv3#readme",
+	"dependencies": {
+		"express": "^4.15.4",
+		"nodemon": "^1.11.0"
+	}
 }
