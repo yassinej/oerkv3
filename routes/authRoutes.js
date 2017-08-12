@@ -5,6 +5,7 @@ module.exports = (app, passport) => {
 	app.post(
 		'/auth/login',
 		passport.authenticate('local-login', (req, res) => {
+			console.log('_authRoutes_req is:', req);
 			res.redirect('/items');
 		})
 	);

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Container } from 'semantic-ui-react';
 import Landing from './Landing';
-import Header from './Header';
+import NavBar from './NavBar';
 import LoginPage from './Login/LoginPage';
 import LoginForm from './Login/LoginForm';
 import SignupForm from './Login/SignupForm';
@@ -18,8 +19,8 @@ class App extends Component {
 		return (
 			<div>
 				<BrowserRouter>
-					<div className="container">
-						<Header />
+					<Container>
+						<NavBar />
 						<Route exact path="/" component={Landing} />
 						<Route exact path="/login" component={LoginPage} />
 						<Route exact path="/loginForm" component={LoginForm} />
@@ -27,7 +28,7 @@ class App extends Component {
 						<Route exact path="/items" component={ItemsList} />
 						<Route exact path="/packages" component={ItemsList} />
 						<Route exact path="/about" component={About} />
-					</div>
+					</Container>
 				</BrowserRouter>
 			</div>
 		);

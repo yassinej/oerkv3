@@ -16,11 +16,13 @@ module.exports = function(passport) {
 
 	// used to serialize the user for the session
 	passport.serializeUser(function(user, done) {
+		console.log('_passport_Serialize');
 		done(null, user.id);
 	});
 
 	// used to deserialize the user
 	passport.deserializeUser(function(id, done) {
+		console.log('_passport_DeSerialize');
 		User.findById(id, function(err, user) {
 			done(err, user);
 		});
@@ -43,6 +45,7 @@ module.exports = function(passport) {
 
 				// asynchronous
 				process.nextTick(function() {
+					console.log('_passport_Local-login');
 					User.findOne({ 'local.email': email }, function(err, user) {
 						// if there are any errors, return the error
 						if (err) {
@@ -61,7 +64,7 @@ module.exports = function(passport) {
 							return done(null, false);
 						} else {
 							// all is well, return user
-							console.log('all good');
+							console.log('all good', user);
 							return done(null, user);
 						}
 					});
@@ -83,23 +86,20 @@ module.exports = function(passport) {
 				passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
 			},
 			function(req, email, password, done) {
+				console.log('_passport_Local-signup');
 				if (email) email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
 
 				// asynchronous
-				process.nextTick(function() {
+				process.nextTick(() => {
 					// if the user is not already logged in:
 					if (!req.user) {
-						User.findOne({ 'local.email': email }, function(err, user) {
+						User.findOne({ 'local.email': email }, (err, user) => {
 							// if there are any errors, return the error
 							if (err) return done(err);
 
 							// check to see if theres already a user with that email
 							if (user) {
-								return done(
-									null,
-									false,
-									req.flash('signupMessage', 'That email is already taken.')
-								);
+								return done(null, false);
 							} else {
 								// create the user
 								const newUser = new User();
@@ -107,7 +107,7 @@ module.exports = function(passport) {
 								newUser.local.email = email;
 								newUser.local.password = newUser.generateHash(password);
 
-								newUser.save(function(err) {
+								newUser.save(err => {
 									if (err) return done(err);
 
 									return done(null, newUser);
@@ -118,21 +118,17 @@ module.exports = function(passport) {
 					} else if (!req.user.local.email) {
 						// ...presumably they're trying to connect a local account
 						// BUT let's check if the email used to connect a local account is being used by another user
-						User.findOne({ 'local.email': email }, function(err, user) {
+						User.findOne({ 'local.email': email }, (err, user) => {
 							if (err) return done(err);
 
 							if (user) {
-								return done(
-									null,
-									false,
-									req.flash('loginMessage', 'That email is already taken.')
-								);
+								return done(null, false);
 								// Using 'loginMessage instead of signupMessage because it's used by /connect/local'
 							} else {
 								const user = req.user;
 								user.local.email = email;
 								user.local.password = user.generateHash(password);
-								user.save(function(err) {
+								user.save(err => {
 									if (err) return done(err);
 
 									return done(null, user);
