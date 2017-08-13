@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
-// import surveysReducer from './surveysReducer';
+import itemsReducer from './itemsReducer';
+import packagesReducer from './packagesReducer';
 import { reducer as formReducer } from 'redux-form';
-
+window.axios = require('axios');
 export default combineReducers({
 	auth: authReducer,
-	form: formReducer
-	// surveys: surveysReducer
+	form: formReducer,
+	items: itemsReducer,
+	packages: packagesReducer
 });

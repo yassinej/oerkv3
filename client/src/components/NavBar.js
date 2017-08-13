@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button, Container, Menu, Segment } from 'semantic-ui-react';
+import {
+	Button,
+	Container,
+	Menu,
+	Segment,
+	Icon,
+	Dropdown
+} from 'semantic-ui-react';
 
 class NavBar extends Component {
 	renderContent() {
@@ -9,49 +16,54 @@ class NavBar extends Component {
 			case null:
 				return 'still deciding';
 			case false:
-				return (
-					<Menu.Item className="item">
-						<Button positive>
-							<Link to="/login">Login</Link>
-						</Button>
-					</Menu.Item>
-				);
-			default:
 				return [
-					<Menu.Item key="1" className="item">
-						Logged in as {this.props.auth.google.name}
+					<Menu.Item key="1" className="item" as={Link} to="/login">
+						Login
 					</Menu.Item>,
-					<Menu.Item key="2">
-						<Button negative>
-							<a href="/api/logout">Logout</a>
-						</Button>
+					<Menu.Item key="2" as="a" href="/auth/google">
+						Login with Google
+					</Menu.Item>
+				];
+			default:
+				const text = `Logged in as ${this.props.auth.google.name}`;
+				return [
+					<Dropdown pointing text={text} className="link item">
+						<Dropdown.Menu>
+							<Dropdown.Item as={Link} to="/profile">
+								My Profile
+							</Dropdown.Item>
+							<Dropdown.Item as="a" href="/api/logout">
+								Logout
+							</Dropdown.Item>
+						</Dropdown.Menu>
+					</Dropdown>,
+					<Menu.Item key="2" className="item">
+						<Icon name="cart" />
 					</Menu.Item>
 				];
 		}
 	}
 	render() {
 		return (
-			<Segment inverted style={{ marginBottom: '0' }}>
-				<Menu inverted pointing secondary size="large">
-					<Container>
-						<Menu.Item active>
-							<Link to="/">Home</Link>
-						</Menu.Item>
-						<Menu.Item>
-							<Link to="/items">Items</Link>
-						</Menu.Item>
-						<Menu.Item>
-							<Link to="/packages">Packages</Link>
-						</Menu.Item>
-						<Menu.Item>
-							<Link to="/about">About</Link>
-						</Menu.Item>
-						<Menu.Menu position="right">
-							{this.renderContent()}
-						</Menu.Menu>
-					</Container>
-				</Menu>
-			</Segment>
+			<Menu pointing secondary size="large">
+				<Container>
+					<Menu.Item as={Link} to="/" active>
+						OERK
+					</Menu.Item>
+					<Menu.Item as={Link} to="/items">
+						Items
+					</Menu.Item>
+					<Menu.Item as={Link} to="/packages">
+						Packages
+					</Menu.Item>
+					<Menu.Item as={Link} to="/about">
+						About
+					</Menu.Item>
+					<Menu.Menu position="right">
+						{this.renderContent()}
+					</Menu.Menu>
+				</Container>
+			</Menu>
 		);
 	}
 }

@@ -1,13 +1,17 @@
 import React from 'react';
 import { Button, Container, Header, Icon, Segment } from 'semantic-ui-react';
-
+import { Link } from 'react-router-dom';
 const Landing = () => {
 	return (
-		<Segment
-			inverted
-			textAlign="center"
-			style={{ minHeight: '600px', padding: '1em 0em' }}
-			vertical
+		<div
+			style={{
+				textAlign: 'center',
+
+				backgroundImage: "url('http://i.imgur.com/K3mPv14.jpg')",
+				backgroundSize: 'cover',
+				minHeight: '600px',
+				padding: '1em 0em'
+			}}
 		>
 			<Container text>
 				<Header
@@ -15,6 +19,7 @@ const Landing = () => {
 					content="OERK"
 					inverted
 					style={{
+						fontColor: 'teal',
 						fontSize: '4em',
 						fontWeight: 'normal',
 						marginBottom: 0,
@@ -30,12 +35,12 @@ const Landing = () => {
 						fontWeight: 'normal'
 					}}
 				/>
-				<Button primary size="huge">
+				<Button as={Link} to="/items" positive size="huge">
 					Get Started
 					<Icon name="right arrow" />
 				</Button>
 			</Container>
-		</Segment>
+		</div>
 	);
 };
 

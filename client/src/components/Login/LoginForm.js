@@ -4,10 +4,19 @@ import { Field, reduxForm } from 'redux-form';
 // import { Link } from 'react-router-dom';
 import FormField from '../Form/FormField';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as actions from '../../actions';
 
 import fields from '../Form/fields';
-import { Button, Form, Grid, Header, Icon, Divider } from 'semantic-ui-react';
+import {
+	Button,
+	Form,
+	Grid,
+	Header,
+	Icon,
+	Divider,
+	Message
+} from 'semantic-ui-react';
 
 class LoginForm extends Component {
 	renderFields() {
@@ -24,7 +33,7 @@ class LoginForm extends Component {
 		});
 	}
 	render() {
-		const { formValues, submitCredentials, history } = this.props;
+		const { formValues, submitLogin, history } = this.props;
 		return (
 			<Grid>
 				<Grid.Row centered style={{ paddingBottom: '0' }}>
@@ -40,10 +49,13 @@ class LoginForm extends Component {
 						<Divider />
 						<Form>
 							{this.renderFields()}
-							<Button onClick={() => submitCredentials(formValues, history)}>
+							<Button onClick={() => submitLogin(formValues, history)}>
 								Submit
 							</Button>
 						</Form>
+						<Message>
+							New to us? <Link to="/signup">Sign Up</Link>
+						</Message>
 					</Grid.Column>
 				</Grid.Row>
 			</Grid>

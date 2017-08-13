@@ -16,13 +16,13 @@ module.exports = function(passport) {
 
 	// used to serialize the user for the session
 	passport.serializeUser(function(user, done) {
-		console.log('_passport_Serialize');
+		//console.log('_passport_Serialize');
 		done(null, user.id);
 	});
 
 	// used to deserialize the user
 	passport.deserializeUser(function(id, done) {
-		console.log('_passport_DeSerialize');
+		//console.log('_passport_DeSerialize');
 		User.findById(id, function(err, user) {
 			done(err, user);
 		});
@@ -45,26 +45,26 @@ module.exports = function(passport) {
 
 				// asynchronous
 				process.nextTick(function() {
-					console.log('_passport_Local-login');
+					//console.log('_passport_Local-login');
 					User.findOne({ 'local.email': email }, function(err, user) {
 						// if there are any errors, return the error
 						if (err) {
-							console.log('error found', err);
+							//console.log('error found', err);
 							return done(err);
 						}
 
 						// if no user is found, return the message
 						if (!user) {
-							console.log('No user found.');
+							//console.log('No user found.');
 							return done(null, false);
 						}
 
 						if (!user.validPassword(password, user)) {
-							console.log('loginMessage', 'Oops! Wrong password.');
+							//console.log('loginMessage', 'Oops! Wrong password.');
 							return done(null, false);
 						} else {
 							// all is well, return user
-							console.log('all good', user);
+							//console.log('all good', user);
 							return done(null, user);
 						}
 					});
@@ -86,7 +86,7 @@ module.exports = function(passport) {
 				passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
 			},
 			function(req, email, password, done) {
-				console.log('_passport_Local-signup');
+				//console.log('_passport_Local-signup');
 				if (email) email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
 
 				// asynchronous

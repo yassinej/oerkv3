@@ -1,11 +1,12 @@
 const passport = require('passport');
+
 module.exports = (app, passport) => {
 	// Local ---------------------------------
 	// process the login form
 	app.post(
 		'/auth/login',
 		passport.authenticate('local-login', (req, res) => {
-			console.log('_authRoutes_req is:', req);
+			//console.log('_authRoutes_req is:', req);
 			res.redirect('/items');
 		})
 	);
@@ -42,14 +43,7 @@ module.exports = (app, passport) => {
 	});
 
 	app.get('/api/current_user', (req, res) => {
-		console.log('Logged in user is', req.user);
+		//console.log('Logged in user is', req.user);
 		res.status(200).send(req.user);
 	});
-
-	// route middleware to ensure user is logged in
-	function isLoggedIn(req, res, next) {
-		if (req.isAuthenticated()) return next();
-
-		res.redirect('/login');
-	}
 };

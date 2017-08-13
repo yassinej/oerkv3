@@ -16,14 +16,21 @@
 		"type": "git",
 		"url": "git+https://github.com/yassinej/oerkv3.git"
 	},
-	"keywords": ["React", "MERN", "Redux", "Passport"],
+	"keywords": [
+		"React",
+		"MERN",
+		"Redux",
+		"Passport"
+	],
 	"bugs": {
 		"url": "https://github.com/yassinej/oerkv3/issues"
 	},
 	"homepage": "https://github.com/yassinej/oerkv3#readme",
 	"dependencies": {
+		"axios": "^0.16.2",
 		"bcrypt-nodejs": "0.0.3",
 		"body-parser": "^1.17.2",
+		"concurrently": "^3.5.0",
 		"cookie-parser": "^1.4.3",
 		"express": "^4.15.4",
 		"express-session": "^1.15.5",
