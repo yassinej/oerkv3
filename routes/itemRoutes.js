@@ -6,7 +6,7 @@ module.exports = app => {
 	app.get('/api/items', async (req, res) => {
 		const items = await Item.find({});
 		//console.log('_itemRoutes_Found items are:', items);
-		res.send(items);
+		res.status(200).send(items);
 	});
 	app.post('/api/items', requireLogin, async (req, res) => {
 		//console.log('_itemRoutes_body is:', req.body);
