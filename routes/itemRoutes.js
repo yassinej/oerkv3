@@ -35,4 +35,15 @@ module.exports = app => {
 			res.status(422).send(e);
 		}
 	});
+	app.post('/api/addtocart', requireLogin, async (req, res) => {
+		//console.log('_itemRoutes_body is:', req.body);
+		console.log('_itemRoutes_body is:', req.body.id);
+
+		// try {
+		// 	await user.save();
+		// 	res.status(200).send(cart);
+		// } catch (e) {
+		// 	res.status(422).send(e);
+		// }
+	});
 };

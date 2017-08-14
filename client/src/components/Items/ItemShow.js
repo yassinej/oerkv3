@@ -32,7 +32,7 @@ const ItemShow = ({ item }) => {
 	return (
 		<Modal
 			trigger={
-				<Button size="small" floated="right">
+				<Button size="medium" floated="right">
 					More info
 				</Button>
 			}

@@ -1,19 +1,28 @@
 import React from 'react';
 import { Card, Icon, Image, Button } from 'semantic-ui-react';
 import ItemShow from './ItemShow';
-const renderAddCart = auth => {
+import { connect } from 'react-redux';
+
+const renderAddCart = (auth, addToCart) => {
 	if (auth === null || !auth) {
 		return '';
 	} else {
 		return (
-			<Button positive size="medium" floated="left">
-				<Icon size="large" name="add to cart" />
+			<Button
+				positive
+				size="medium"
+				floated="left"
+				style={{ paddingRight: '0.5em ', paddingLeft: '0.5em' }}
+				onClick={addToCart}
+			>
+				<Icon name="add"> </Icon>
+				Add to Cart
 			</Button>
 		);
 	}
 };
 
-const ItemCard = ({ item, auth }) => {
+const ItemCard = ({ item, auth, addToCart }) => {
 	return (
 		<Card>
 			<Image src={item.image} />
@@ -35,11 +44,17 @@ const ItemCard = ({ item, auth }) => {
 			</Card.Content>
 
 			<Card.Content extra>
-				{renderAddCart(auth)}
+				{renderAddCart(auth, addToCart)}
 				<ItemShow item={item} />
 			</Card.Content>
 		</Card>
 	);
 };
 
-export default ItemCard;
+function mapStateToProps(state) {
+	return {
+		items: state.items,
+		auth: state.auth
+	};
+}
+export default connect(mapStateToProps)(ItemCard);

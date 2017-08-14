@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Header, Grid, Segment } from 'semantic-ui-react';
-import * as actions from '../../actions';
+import { addToCart, fetchItems } from '../../actions';
 import ItemCard from './ItemCard';
+
 class ItemsList extends Component {
 	componentWillMount() {
 		//console.log('_ItemsList_fetching items');
@@ -16,12 +17,15 @@ class ItemsList extends Component {
 		if (!this.props.items.length) {
 			return <Header as="h1">Loading Items...</Header>;
 		}
-
+		//console.log('_ItemsList_renderItems addToCart is:', addToCart);
 		return this.props.items.map(item => {
-			//console.log('_ItemsList_renderItems Item is:', item.name);
 			return (
 				<Grid.Column key={item.name}>
-					<ItemCard item={item} auth={this.props.auth} />
+					<ItemCard
+						item={item}
+						auth={this.props.auth}
+						addToCart={() => this.props.addToCart({ id: item._id })}
+					/>
 				</Grid.Column>
 			);
 		});
@@ -46,7 +50,8 @@ function mapStateToProps(state) {
 	//console.log('_ItemsList_mapState state is:', state);
 	return {
 		items: state.items,
-		auth: state.auth
+		auth: state.auth,
+		cart: state.cart
 	};
 }
-export default connect(mapStateToProps, actions)(ItemsList);
+export default connect(mapStateToProps, { addToCart, fetchItems })(ItemsList);

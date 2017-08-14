@@ -20,6 +20,16 @@ const userSchema = mongoose.Schema({
 		token: String,
 		email: String,
 		name: String
+	},
+	cart: {
+		itemList: [
+			{
+				_itemId: String,
+				Quantity: Number
+			}
+		],
+		totalPrice: Number,
+		checkout: { type: Boolean, default: false }
 	}
 });
 

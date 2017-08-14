@@ -1,58 +1,50 @@
 import React, { Component } from 'react';
-import {
-	Sidebar,
-	Segment,
-	Button,
-	Menu,
-	Image,
-	Icon,
-	Header
-} from 'semantic-ui-react';
+import { Header, Step, Icon, Segment } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
 class Cart extends Component {
-	state = { visible: false };
-
-	toggleVisibility = () => this.setState({ visible: !this.state.visible });
+	// state = { visible: false };
+	//
+	// toggleVisibility = () => this.setState({ visible: !this.state.visible });
 
 	render() {
-		const { visible } = this.state;
+		// const { visible } = this.state;
 		return (
 			<div>
-				<Button onClick={this.toggleVisibility}>Toggle Visibility</Button>
-				<Sidebar.Pushable as={Segment}>
-					<Sidebar
-						as={Menu}
-						animation="push"
-						width="thin"
-						direction="right"
-						visible={visible}
-						icon="labeled"
-						vertical
-						inverted
-					>
-						<Menu.Item name="home">
-							<Icon name="home" />
-							Home
-						</Menu.Item>
-						<Menu.Item name="gamepad">
-							<Icon name="gamepad" />
-							Games
-						</Menu.Item>
-						<Menu.Item name="camera">
-							<Icon name="camera" />
-							Channels
-						</Menu.Item>
-					</Sidebar>
-					<Sidebar.Pusher>
-						<Segment basic>
-							<Header as="h3">Application Content</Header>
-							<Image src="/assets/images/wireframe/paragraph.png" />
-						</Segment>
-					</Sidebar.Pusher>
-				</Sidebar.Pushable>
+				<Segment>
+					<Header size="huge" textAlign="center">
+						Discover our Items
+					</Header>
+				</Segment>
+				<Step.Group>
+					<Step active>
+						<Icon name="cart" />
+						<Step.Content
+							title="Check your cart"
+							description="Confirm your cart content"
+						/>
+					</Step>
+					<Step disabled>
+						<Icon name="user" />
+						<Step.Content
+							title="User Infos"
+							description="Verify your account details"
+						/>
+					</Step>
+
+					<Step disabled>
+						<Icon name="icon" />
+						<Step.Content
+							title="Confirm Order"
+							description="Verify your account details"
+						/>
+					</Step>
+				</Step.Group>
 			</div>
 		);
 	}
 }
-
-export default Cart;
+function mapStateToProps(state) {
+	return { cart: state.cart };
+}
+export default connect(mapStateToProps)(Cart);

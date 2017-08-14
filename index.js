@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const expressSession = require('express-session');
+const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 
@@ -10,6 +10,7 @@ const keys = require('./config/keys');
 require('./models/User');
 require('./models/Item');
 require('./models/Package');
+require('./models/Comment');
 require('./services/passport')(passport);
 
 mongoose.Promise = global.Promise;
@@ -23,11 +24,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // required for passport
 app.use(
-	expressSession({
-		secret: keys.cookieKey, // session secret
-		resave: true,
-		saveUninitialized: true,
-		maxAge: 30 * 24 * 60 * 60 * 1000
+	cookieSession({
+		maxAge: 30 * 24 * 60 * 60 * 1000,
+		keys: [keys.cookieKey]
 	})
 );
 app.use(passport.initialize());

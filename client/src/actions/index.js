@@ -4,7 +4,8 @@ import {
 	CREATE_ITEM,
 	FETCH_ITEMS,
 	FETCH_PACKAGES,
-	CREATE_PACKAGE
+	CREATE_PACKAGE,
+	ADD_ITEM_TO_CART
 } from './types';
 
 export const fetchUser = () => async dispatch => {
@@ -14,6 +15,7 @@ export const fetchUser = () => async dispatch => {
 
 export const submitLogin = (values, history) => async dispatch => {
 	//console.log('_action_submitLogin_Values to post are : ', values);
+	console.log('_action_submitLogin_History is : ', history);
 	const res = await axios.post('/auth/login', values);
 	//console.log('_action_index_Axios post sent');
 	dispatch({ type: FETCH_USER, payload: res.data });
@@ -47,4 +49,9 @@ export const submitPackage = (values, history) => async dispatch => {
 	const res = await axios.post('/api/packages', values);
 	dispatch({ type: CREATE_PACKAGE, payload: res.data });
 	history.push('/packages');
+};
+export const addToCart = values => async dispatch => {
+	console.log('_action_addToCart_Values to post are : ', values);
+	const res = await axios.post('/api/addtocart', values);
+	dispatch({ type: ADD_ITEM_TO_CART, payload: res.data });
 };

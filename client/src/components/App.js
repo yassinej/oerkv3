@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route, BrowserRouter, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Container } from 'semantic-ui-react';
 import Landing from './Landing';
@@ -18,15 +18,17 @@ class App extends Component {
 		this.props.fetchUser();
 	}
 	render() {
+		const NavBarWithRouter = withRouter(NavBar);
 		return (
 			<div>
 				<BrowserRouter>
 					<Container>
-						<NavBar />
+						<NavBarWithRouter />
 						<Route exact path="/" component={Landing} />
 						<Route exact path="/login" component={LoginForm} />
 						<Route exact path="/signup" component={SignupForm} />
 						<Route exact path="/profile" component={Profile} />
+						<Route exact path="/cart" component={Cart} />
 						<Route exact path="/items" component={ItemsList} />
 						<Route exact path="/packages" component={PackagesList} />
 						<Route exact path="/about" component={About} />
